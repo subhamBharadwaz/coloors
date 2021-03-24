@@ -4,6 +4,9 @@ const generateBtn = document.querySelector(".generate");
 const sliders = document.querySelectorAll('input[type="range"]');
 const currentHexes = document.querySelectorAll(".color h2");
 const popup = document.querySelector(".copy-container");
+const adjustBtn = document.querySelectorAll(".adjust");
+const closeAdjustments = document.querySelectorAll(".close-adjustment");
+const sliderContainers = document.querySelectorAll(".sliders");
 let initialColors;
 
 // Add event listeners
@@ -27,6 +30,18 @@ popup.addEventListener("transitionend", () => {
   const popupBox = popup.children[0];
   popup.classList.remove("active");
   popupBox.classList.remove("active");
+});
+
+adjustBtn.forEach((btn, idx) => {
+  btn.addEventListener("click", () => {
+    openAdjustmentPanel(idx);
+  });
+});
+
+closeAdjustments.forEach((btn, idx) => {
+  btn.addEventListener("click", () => {
+    closeAdjustmentPanel(idx);
+  });
 });
 
 // Functions
@@ -163,6 +178,13 @@ function copyToClipboard(hex) {
   const popupBox = popup.children[0];
   popup.classList.add("active");
   popupBox.classList.add("active");
+}
+
+function openAdjustmentPanel(index) {
+  sliderContainers[index].classList.toggle("active");
+}
+function closeAdjustmentPanel(index) {
+  sliderContainers[index].classList.remove("active");
 }
 
 randomColors();
